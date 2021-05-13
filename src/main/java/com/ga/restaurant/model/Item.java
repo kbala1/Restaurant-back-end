@@ -24,6 +24,9 @@ public class Item {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Item() {
+
+    }
 
     public Item(Long id, String name, double price) {
         this.id = id;

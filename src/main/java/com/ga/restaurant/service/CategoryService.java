@@ -16,8 +16,10 @@ public class CategoryService {
     public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+
     public List<Category> getCategories() {
         System.out.println("service calling getCategories ==>");
-        return categoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
+        return categories;
     }
 }

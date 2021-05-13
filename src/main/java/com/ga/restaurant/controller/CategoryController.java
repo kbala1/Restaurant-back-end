@@ -23,6 +23,7 @@ public class CategoryController {
     @GetMapping("/categories")
     public List<Category> getCategories() {
         System.out.println("calling getCategories ==>");
+
         return categoryService.getCategories();
     }
 

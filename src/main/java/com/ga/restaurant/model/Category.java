@@ -10,7 +10,6 @@ import java.util.List;
 @Table(name = "categories")
 public class Category {
 
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +21,16 @@ public class Category {
     @Column
     private String description;
 
+
     @OneToMany(mappedBy = "category", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Item> itemList;
 
-    public Category(Long id, String name, String description) {
+    public Category(Long id, String name, String description, List<Item> itemList) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.itemList = itemList;
     }
 
     public Category() {
