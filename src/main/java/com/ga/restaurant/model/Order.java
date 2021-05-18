@@ -2,8 +2,11 @@ package com.ga.restaurant.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "orders")
@@ -31,21 +34,30 @@ public class Order {
     @Column
     String orderStatus;
 
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    private Calendar createdDate;
+
+    @Column
     private Integer itemQuantity;
 
+    @Column
     private String orderType;
 
     public Order() {
 
     }
 
-    public Order(Long id, User user, Item item, String orderType, Integer itemQuantity, String orderStatus) {
+    public Order(Long id, User user, Item item, String orderType, Integer itemQuantity, String orderStatus, Calendar createdDate) {
         this.id = id;
         this.user = user;
         this.item = item;
         this.orderType = orderType;
         this.itemQuantity = itemQuantity;
         this.orderStatus = orderStatus;
+        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -96,7 +108,13 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
+    public Calendar getCreatedDate() {
+        return createdDate;
+    }
 
+    public void setCreatedDate(Calendar createdDate) {
+        this.createdDate = createdDate;
+    }
 
     @Override
     public String toString() {
@@ -106,6 +124,7 @@ public class Order {
                 ", item=" + item +
                 '}';
     }
+
 
 
 }
