@@ -1,7 +1,6 @@
 package com.ga.restaurant.model;
 
 import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
