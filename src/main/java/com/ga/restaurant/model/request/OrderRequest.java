@@ -1,7 +1,5 @@
 package com.ga.restaurant.model.request;
 
-import com.ga.restaurant.model.request.ItemRequest;
-
 import java.util.List;
 
 public class OrderRequest {

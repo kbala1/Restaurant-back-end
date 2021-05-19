@@ -61,7 +61,7 @@ public class OrderService {
         // save user object to user table
         User createdUser = userRepository.save(user);
 
-        // get items by itemIds -- this might not be necessary
+        // get items by itemIds
         List<Item> items = orderRequestObject.getItems().stream()
                 .map(item -> itemRepository.findItemById(item.getItemId()))
                 .filter(item -> item != null)
@@ -81,17 +81,11 @@ public class OrderService {
             order.setItemQuantity(orderRequestObject.getItems().get(i).getItemQuantity());
             order.setOrderType(orderRequestObject.getOrderType());
 
-//            if (orderId != null) {
-//                order.setId(orderId);
-//                createdOrders.add(orderRepository.save(order));
-//            }
-//            else {
                 // get id from first entry in order table for this order
                 // because orderId is not unique in order table
                 Order createdOrder = orderRepository.save(order);
                 createdOrders.add(createdOrder);
-//               orderId = createdOrder.getId();
-//            }
+//
         }
 
         return null;

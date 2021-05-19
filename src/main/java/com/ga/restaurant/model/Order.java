@@ -1,9 +1,8 @@
 package com.ga.restaurant.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 import java.util.Calendar;
