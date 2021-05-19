@@ -39,6 +39,7 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
+    // get order by id
     public Order getOrderById(Long orderId) {
         System.out.println("Calling getOrderList");
         Order order = orderRepository.getOrderById(orderId);
@@ -48,6 +49,7 @@ public class OrderService {
         return order;
     }
 
+    // create order
     public Order createOrder(OrderRequest orderRequestObject) {
         System.out.println("Calling createOrder");
 
@@ -73,6 +75,7 @@ public class OrderService {
 
         // create order objects -- use user id from saved user
         List<Order> createdOrders = new ArrayList<>();
+
         //Long orderId = null;
         for(int i = 0; i<items.size(); i++){
             Order order = new Order();
@@ -81,16 +84,16 @@ public class OrderService {
             order.setItemQuantity(orderRequestObject.getItems().get(i).getItemQuantity());
             order.setOrderType(orderRequestObject.getOrderType());
 
-                // get id from first entry in order table for this order
-                // because orderId is not unique in order table
-                Order createdOrder = orderRepository.save(order);
-                createdOrders.add(createdOrder);
-//
+            // get id from first entry in order table for this order
+            // because orderId is not unique in order table
+            Order createdOrder = orderRepository.save(order);
+            createdOrders.add(createdOrder);
         }
 
         return null;
     }
 
+    // get order by phoneNo
     public List<Order> getOrdersByPhoneNo(String phoneNo) {
         System.out.println("Calling getOrderByPhone");
         List<User> users = userRepository.getUsersByPhoneNo(phoneNo);
