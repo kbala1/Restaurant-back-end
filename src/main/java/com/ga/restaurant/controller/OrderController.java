@@ -25,12 +25,14 @@ public class OrderController {
         return orderService.getOrderById(orderId);
     }
 
+    // add order for a user
     @PostMapping("/orders")
     public Order createOrder(@RequestBody OrderRequest orderRequestObject) {
         System.out.println("Calling CreateOrder");
         return orderService.createOrder(orderRequestObject);
     }
 
+    // get user by phoneNo
     @GetMapping(path = "user/{phoneNo}")
     public List<Order> getOrderByPhone(@PathVariable String phoneNo) {
         System.out.println("Calling getOrderByPhone");

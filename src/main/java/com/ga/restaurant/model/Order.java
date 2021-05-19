@@ -9,7 +9,6 @@ import java.util.Calendar;
 
 @Entity
 @Table(name = "orders")
-//@IdClass(OrderPk.class)
 public class Order {
 
     @Id
@@ -18,13 +17,12 @@ public class Order {
     private Long id;
 
     //many orders can belong to one user
-   // @Id
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    //@Id
+    // many items can belong to one order
     @ManyToOne
     @JoinColumn(name = "item_id")
     @JsonIgnore
@@ -35,8 +33,6 @@ public class Order {
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private Calendar createdDate;
 
     @Column
