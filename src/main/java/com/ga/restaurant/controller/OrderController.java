@@ -5,6 +5,8 @@ import com.ga.restaurant.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class OrderController {
@@ -30,9 +32,9 @@ public class OrderController {
     }
 
     @GetMapping(path = "user/{phoneNo}")
-    public Order getOrderByPhone(@PathVariable String phoneNo) {
+    public List<Order> getOrderByPhone(@PathVariable String phoneNo) {
         System.out.println("Calling getOrderByPhone");
-        return orderService.getOrderByPhoneNo(phoneNo);
+        return orderService.getOrdersByPhoneNo(phoneNo);
     }
 }
 

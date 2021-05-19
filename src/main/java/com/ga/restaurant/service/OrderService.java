@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,12 +64,12 @@ public class OrderService {
         // get items by itemIds -- this might not be necessary
         List<Item> items = orderRequestObject.getItems().stream()
                 .map(item -> itemRepository.findItemById(item.getItemId()))
+                .filter(item -> item != null)
                 .collect(Collectors.toList());
-        //If itemId doesn't exist
-       // Item item = itemRepository.findItemById(itemId);
-//        if(item.isEmpty() {
-//            throw new DataNotFoundException("Item with this itemId " + item.getItemId() + "doesn't exist");
-//        }
+
+        if(items.isEmpty()) {
+            throw new DataNotFoundException("None of the items exist");
+        }
 
         // create order objects -- use user id from saved user
         List<Order> createdOrders = new ArrayList<>();
@@ -96,16 +97,19 @@ public class OrderService {
         return null;
     }
 
-    public Order getOrderByPhoneNo(String phoneNo) {
+    public List<Order> getOrdersByPhoneNo(String phoneNo) {
         System.out.println("Calling getOrderByPhone");
-        User user = userRepository.getUserByPhoneNo(phoneNo);
+        List<User> users = userRepository.getUsersByPhoneNo(phoneNo);
 
-        if (user == null) {
+        if (users.isEmpty()) {
             throw new DataNotFoundException("User with phoneNo " + phoneNo + " not found");
         }
 
-        Order order = orderRepository.getOrderByUserId(user.getId());
-        return order;
+        List<Order> orders = users.stream()
+                .map(user -> orderRepository.getOrdersByUserId(user.getId()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        return orders;
     }
 
 }
