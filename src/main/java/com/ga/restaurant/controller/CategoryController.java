@@ -20,10 +20,10 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    // get the menu
     @GetMapping("/categories")
     public List<Category> getCategories() {
         System.out.println("calling getCategories ==>");
-
         return categoryService.getCategories();
     }
 
